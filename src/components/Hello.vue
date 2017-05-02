@@ -25,8 +25,17 @@ import request from 'superagent/superagent'
 export default {
   name: 'hello',
   data () {
-    let response = await request.get('https://api.icndb.com/jokes/random')
-    console.log(response)
+    async function getContent () {
+      try {
+        let response = await request.get('https://api.icndb.com/jokes/random').set('Accept', 'application/json')
+        return JSON.parse(response.text)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    getContent().then((data) => {
+      this.msg = data.value.joke
+    })
     return {
       msg: 'Welcome to Your Vue.js App'
     }
