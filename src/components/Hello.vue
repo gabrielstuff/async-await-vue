@@ -21,6 +21,11 @@
 </template>
 
 <script>
+async function asyncFun () {
+  var value = 10
+  return value
+}
+(async () => { console.log(await asyncFun()) })()
 import request from 'superagent/superagent'
 export default {
   name: 'hello',
